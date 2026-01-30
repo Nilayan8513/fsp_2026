@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Fibonacci Calculator{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2><i class="fas fa-wave-square"></i> Fibonacci Calculator</h2>
+    </div>
+    <div class="card-body">
+        <form action="fibo" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="n">Select a number (0-1000):</label>
+                <div class="range-container">
+                    <span class="range-label">0</span>
+                    <input type="range" name="n" id="n" min="0" max="1000" class="form-control-range">
+                    <span class="range-label">1000</span>
+                </div>
+                <div class="range-value">
+                    <output for="n" id="rangeValue">500</output>
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-calculator"></i> Calculate Fibonacci
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+document.getElementById('n').addEventListener('input', function() {
+    document.getElementById('rangeValue').value = this.value;
+});
+</script>
+{% endblock %}

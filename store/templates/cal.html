@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Calculator{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2><i class="fas fa-calculator"></i> Calculator</h2>
+    </div>
+    <div class="card-body">
+        <form action="calculate" method="post">
+            {% csrf_token %}
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="a">First Number:</label>
+                    <input type="number" name="a" id="a" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="b">Second Number:</label>
+                    <input type="number" name="b" id="b" class="form-control" required>
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button type="submit" name="add" value="add" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Sum
+                </button>
+                <button type="submit" name="subtract" value="subtract" class="btn btn-warning">
+                    <i class="fas fa-minus"></i> Subtract
+                </button>
+                <button type="submit" name="multiply" value="multiply" class="btn btn-success">
+                    <i class="fas fa-times"></i> Multiply
+                </button>
+                <button type="submit" name="divide" value="divide" class="btn btn-danger">
+                    <i class="fas fa-divide"></i> Divide
+                </button>
+            </div>
+        </form>
+
+        {% if result %}
+        <div class="result-display">
+            <h3>Result: {{ result }}</h3>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Search Students - Student Management System{% endblock %}
+
+{% block content %}
+<div class="card" style="max-width: 800px; margin: 0 auto 30px;">
+    <div class="card-header">
+        <h2 class="card-title">🔍 Search Students by Department</h2>
+    </div>
+    <form action="searchdata" method="GET" style="padding: 20px; display: flex; gap: 15px; align-items: end;">
+        <div style="flex: 1;">
+            <label class="form-label" for="branch">Select Department:</label>
+            <select name="branch" id="branch" class="form-control" required>
+                <option value="">-- Choose Department --</option>
+                <option value="CSE">Computer Science & Engineering</option>
+                <option value="ECE">Electronics & Communication Engineering</option>
+                <option value="IT">Information Technology</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+</div>
+
+<div class="card" style="max-width: 800px; margin: 0 auto 30px;">
+    <div class="card-header">
+        <h2 class="card-title">🔍 Search Students by Department + City</h2>
+    </div>
+    <form action="searchdatakol" method="GET" style="padding: 20px; display: flex; gap: 15px; align-items: end;">
+        <div style="flex: 1;">
+            <label class="form-label" for="branch">Select Department:</label>
+            <select name="branch" id="branch" class="form-control" required>
+                <option value="">-- Choose Department --</option>
+                <option value="CSE">Computer Science & Engineering</option>
+                <option value="ECE">Electronics & Communication Engineering</option>
+                <option value="IT">Information Technology</option>
+            </select>
+        </div>
+        <div style="flex: 1;">
+            <label class="form-label" for="city">Select City:</label>
+            <select name="city" id="city" class="form-control" required>
+                <option value="">-- Choose City --</option>
+                <option value="Kolkata">Kolkata</option>
+                <option value="Mumbai">Mumbai</option>
+                <option value="Delhi">Delhi</option>
+                <option value="Asansol">Asansol</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+</div>
+
+{% if data %}
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title">Search Results</h2>
+    </div>
+    <div style="overflow-x: auto; padding: 20px;">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Aadhaar</th>
+                    <th>Age</th>
+                    <th>Department</th>
+                    <th>Address</th>
+                    <th>Father's Name</th>
+                    <th>Mother's Name</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Pincode</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in data %}
+                <tr>
+                    <td>{{ user.fname }}</td>
+                    <td>{{ user.lname }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.phno }}</td>
+                    <td>{{ user.aadhar_no }}</td>
+                    <td>{{ user.age }}</td>
+                    <td>{{ user.dept }}</td>
+                    <td>{{ user.addrs }}</td>
+                    <td>{{ user.fathers_name }}</td>
+                    <td>{{ user.mothers_name }}</td>
+                    <td>{{ user.city }}</td>
+                    <td>{{ user.state }}</td>
+                    <td>{{ user.pincode }}</td>
+                    <td>
+                        <a href="edit/{{ user.id }}" class="btn btn-secondary" style="margin-right: 5px; padding: 5px 10px; font-size: 14px;">Edit</a>
+                        <a href="dele/{{ user.id }}" class="btn btn-secondary" style="padding: 5px 10px; font-size: 14px; background: #e74c3c; color: white;">Delete</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="14" style="text-align: center;">No students found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% else %}
+<div class="card" style="max-width: 600px; margin: 0 auto;">
+    <div style="padding: 40px; text-align: center; color: #718096;">
+        <p>📭 No students found. Please search by selecting a department.</p>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

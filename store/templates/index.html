@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Store Home{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2><i class="fas fa-store"></i> Store Management</h2>
+    </div>
+    <div class="card-body">
+        <p>Welcome to the Store Management section of the Student Management System.</p>
+        <div class="button-group">
+            <a href="{% url 'show' %}" class="btn btn-primary">
+                <i class="fas fa-users"></i> View Users
+            </a>
+            <a href="{% url 'insert' %}" class="btn btn-success">
+                <i class="fas fa-plus"></i> Add User
+            </a>
+            <a href="{% url 'student' %}" class="btn btn-info">
+                <i class="fas fa-graduation-cap"></i> Students
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

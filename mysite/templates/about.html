@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}About Us - Student Management System{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title">About Us</h2>
+    </div>
+    <div style="padding: 20px;">
+        {% for info in data %}
+        <div style="margin-bottom: 20px; padding: 15px; background: var(--light-bg); border-radius: 8px;">
+            <p><strong>About:</strong></p>
+            <p>{{ info.about }}</p>
+        </div>
+        {% empty %}
+        <p>No information available.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

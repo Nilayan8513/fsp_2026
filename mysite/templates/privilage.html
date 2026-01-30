@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block title %}Privilege Management - Student Management System{% endblock %}
+
+{% block content %}
+<div class="card" style="max-width: 600px; margin: 0 auto;">
+    <div class="card-header">
+        <h2 class="card-title">
+            <i class="fas fa-shield-alt"></i> Privilege Management
+        </h2>
+        <p style="margin: 0; font-size: 14px; color: #718096;">Manage user role permissions</p>
+    </div>
+
+    <div style="padding: 20px; background: #d4edff; border-left: 4px solid var(--primary-color); margin: 0 20px 20px; border-radius: 5px; font-size: 13px; color: #2d3748;">
+        <i class="fas fa-info-circle"></i> Select a role and configure permissions below
+    </div>
+
+    <form action="setprivilage" method="GET" style="padding: 20px;">
+        <div class="form-group">
+            <label class="form-label" for="role">
+                <i class="fas fa-user-tag"></i> Select Role
+            </label>
+            <select id="role" name="role" class="form-control" required>
+                <option value="">-- Choose a role --</option>
+                <option value="super-admin">Super Admin</option>
+                <option value="sub-admin1">Sub Admin 1</option>
+                <option value="sub-admin2">Sub Admin 2</option>
+                <option value="user">User</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label"><i class="fas fa-cog"></i> Permissions</label>
+            <div style="background: var(--light-bg); padding: 20px; border-radius: 10px; border: 1px solid var(--border-color);">
+                <div style="display: flex; align-items: center; margin-bottom: 15px; cursor: pointer;">
+                    <input type="checkbox" name="edit_aboutus" id="edit_aboutus" value="yes" style="width: 20px; height: 20px; margin-right: 12px; cursor: pointer;">
+                    <label for="edit_aboutus" style="margin: 0; font-weight: 500; color: #555; cursor: pointer; flex: 1;">
+                        <i class="fas fa-file-alt"></i> edit aboutus
+                    </label>
+                </div>
+                <div style="display: flex; align-items: center; margin-bottom: 15px; cursor: pointer;">
+                    <input type="checkbox" name="edit_contactus" id="edit_contactus" value="yes" style="width: 20px; height: 20px; margin-right: 12px; cursor: pointer;">
+                    <label for="edit_contactus" style="margin: 0; font-weight: 500; color: #555; cursor: pointer; flex: 1;">
+                        <i class="fas fa-envelope"></i> edit contactus
+                    </label>
+                </div>
+                <div style="display: flex; align-items: center; margin-bottom: 15px; cursor: pointer;">
+                    <input type="checkbox" name="edit_student_details" id="edit_student_details" value="yes" style="width: 20px; height: 20px; margin-right: 12px; cursor: pointer;">
+                    <label for="edit_student_details" style="margin: 0; font-weight: 500; color: #555; cursor: pointer; flex: 1;">
+                        <i class="fas fa-edit"></i> edit student details
+                    </label>
+                </div>
+                <div style="display: flex; align-items: center; margin-bottom: 15px; cursor: pointer;">
+                    <input type="checkbox" name="delete_students_details" id="delete_students_details" value="yes" style="width: 20px; height: 20px; margin-right: 12px; cursor: pointer;">
+                    <label for="delete_students_details" style="margin: 0; font-weight: 500; color: #555; cursor: pointer; flex: 1;">
+                        <i class="fas fa-trash"></i> delete students details
+                    </label>
+                </div>
+                <div style="display: flex; align-items: center; margin-bottom: 15px; cursor: pointer;">
+                    <input type="checkbox" name="view_student_details" id="view_student_details" value="yes" style="width: 20px; height: 20px; margin-right: 12px; cursor: pointer;">
+                    <label for="view_student_details" style="margin: 0; font-weight: 500; color: #555; cursor: pointer; flex: 1;">
+                        <i class="fas fa-users"></i> view student details
+                    </label>
+                </div>
+                <div style="display: flex; align-items: center; margin-bottom: 15px; cursor: pointer;">
+                    <input type="checkbox" name="search_students_information" id="search_students_information" value="yes" style="width: 20px; height: 20px; margin-right: 12px; cursor: pointer;">
+                    <label for="search_students_information" style="margin: 0; font-weight: 500; color: #555; cursor: pointer; flex: 1;">
+                        <i class="fas fa-search"></i> search students information
+                    </label>
+                </div>
+                <div style="display: flex; align-items: center; margin-bottom: 15px; cursor: pointer;">
+                    <input type="checkbox" name="manage_users" id="manage_users" value="yes" style="width: 20px; height: 20px; margin-right: 12px; cursor: pointer;">
+                    <label for="manage_users" style="margin: 0; font-weight: 500; color: #555; cursor: pointer; flex: 1;">
+                        <i class="fas fa-user-cog"></i> Manage Users
+                    </label>
+                </div>
+                <div style="display: flex; align-items: center; cursor: pointer;">
+                    <input type="checkbox" name="manage_privileges" id="manage_privileges" value="yes" style="width: 20px; height: 20px; margin-right: 12px; cursor: pointer;">
+                    <label for="manage_privileges" style="margin: 0; font-weight: 500; color: #555; cursor: pointer; flex: 1;">
+                        <i class="fas fa-shield-alt"></i> Manage Privileges
+                    </label>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <div style="display: flex; gap: 10px; margin-top: 30px;">
+            <a href="home" class="btn btn-secondary" style="flex: 1; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                <i class="fas fa-arrow-left"></i> Back
+            </a>
+            <button type="submit" class="btn btn-primary" style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                <i class="fas fa-save"></i> Update Privileges
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

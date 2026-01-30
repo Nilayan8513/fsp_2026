@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">Send Bulk Emails</h3>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="{% url 'send_500_emails' %}">
+                        {% csrf_token %}
+                        
+                        <div class="mb-3">
+                            <label for="emails" class="form-label">Email Addresses (comma-separated)</label>
+                            <textarea class="form-control" id="emails" name="emails" rows="6" 
+                                placeholder="example1@gmail.com, example2@gmail.com, example3@gmail.com"
+                                required></textarea>
+                            <small class="text-muted">Enter email addresses separated by commas</small>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="subject" class="form-label">Email Subject</label>
+                            <input type="text" class="form-control" id="subject" name="subject" 
+                                value="Welcome to Our Platform"
+                                placeholder="Enter email subject" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Email Message</label>
+                            <textarea class="form-control" id="message" name="message" rows="8"
+                                placeholder="Enter your email message here"
+                                required>Thank you for registering with our platform. We are excited to have you on board!</textarea>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg">Send Emails</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card mt-4">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">Instructions</h5>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li>Enter email addresses separated by commas</li>
+                        <li>Maximum recommended: 500 emails per batch</li>
+                        <li>Emails are sent in batches of 100</li>
+                        <li>Custom subject and message are required</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card {
+        border: none;
+        border-radius: 10px;
+    }
+    .btn-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+    }
+    .btn-primary:hover {
+        background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+    }
+</style>
+{% endblock %}

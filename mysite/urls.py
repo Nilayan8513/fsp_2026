@@ -25,4 +25,6 @@ urlpatterns = [
     path('logout', views.logout, name='logout'),
     path('privilage', views.view_privilage, name='privilage'),
     path('setprivilage', views.setprivilage, name='setprivilage'),
+    path('send_mail', views.send_email, name='send_mail'),
+    path('send-500-emails', views.send_500_emails, name='send_500_emails')
 ]

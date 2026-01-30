@@ -2,7 +2,18 @@
 from django.shortcuts import render, redirect
 from mysite.models import *
 from django.http import HttpResponse
+from django.core.mail import send_mail
+from django.conf import settings
 
+def send_email(request):
+    send_mail(
+        "Welcome to Our Store",
+        "Thank you for registering with our store. We are excited to have you on board!",
+        settings.EMAIL_HOST_USER,
+        ['deynilayan7890@gmail.com'],
+        fail_silently=False,
+    )
+    return HttpResponse("Email sent successfully.")
 def index(request):
     if 'user' not in request.session:
         return redirect('../mysite/login')
@@ -332,3 +343,48 @@ def setprivilage(request):
         p.manage_privileges = manage_privileges
         p.save()
     return redirect('../mysite/privilage')
+
+def send_500_emails(request):
+    """
+    Send emails to provided recipients in batches.
+    GET: Shows the form
+    POST: Sends the emails
+    """
+    if 'user' not in request.session:
+        return redirect('../mysite/login')
+    
+    if request.method == 'POST':
+        # Get emails from POST request
+        emails_input = request.POST.get('emails', '')
+        subject = request.POST.get('subject', 'Welcome to Our Platform')
+        message = request.POST.get('message', 'Thank you for registering!')
+        
+        # Parse emails (comma-separated)
+        email_list = [email.strip() for email in emails_input.split(',') if email.strip()]
+        
+        if not email_list:
+            return HttpResponse("No email addresses provided.")
+        
+        from_email = settings.EMAIL_HOST_USER
+        batch_size = 100
+        total_sent = 0
+        
+        # Send emails in batches
+        for i in range(0, len(email_list), batch_size):
+            batch = email_list[i:i + batch_size]
+            try:
+                send_mail(
+                    subject,
+                    message,
+                    from_email,
+                    batch,
+                    fail_silently=False,
+                )
+                total_sent += len(batch)
+            except Exception as e:
+                return HttpResponse(f"Error sending batch {i//batch_size + 1}: {str(e)}")
+        
+        return HttpResponse(f"Successfully sent {total_sent} emails!")
+    
+    # GET request - show the form
+    return render(request, 'send_emails.html')
